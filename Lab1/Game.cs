@@ -7,22 +7,25 @@ namespace C_
 {
     public class Game
     {
-        public string Number { get; }
-        public decimal Reward { get; }
-        public string Status { get; }
-        public string OpponentName { get; }
-        private static int gameNumberSeed = 2341;
-        public int numberOfGames { get; }
+        public GameAccount winner;
+        public GameAccount Opponent1;
+        public GameAccount Opponent2;
+        private static int GameNumberSeed = 2341;
+        public string GameNumber { get; }
+        public int Reward { get; }
 
-        public Game(string opponentName, decimal reward, string status)
+        public Game(GameAccount opponent1, GameAccount opponent2, int reward)
         {
+            if (reward < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(reward), "Reward must be positive");
+            }
             Reward = reward;
-            OpponentName = opponentName;
-            this.Status = status;
+            Opponent1 = opponent1;
+            Opponent2 = opponent2;
 
-            this.Number = gameNumberSeed.ToString();
-            gameNumberSeed++;
-            numberOfGames++;
+            this.GameNumber = GameNumberSeed.ToString();
+            GameNumberSeed++;
         }
     }
 }
